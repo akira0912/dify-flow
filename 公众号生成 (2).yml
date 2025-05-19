@@ -1,0 +1,656 @@
+app:
+  description: ''
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: advanced-chat
+  name: 公众号生成
+  use_icon_as_answer_icon: false
+kind: app
+version: 0.1.5
+workflow:
+  conversation_variables:
+  - description: ''
+    id: 8787f367-0f4e-4115-8237-0089f0142555
+    name: content
+    selector:
+    - conversation
+    - content
+    value: ''
+    value_type: string
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        sourceType: tool
+        targetType: llm
+      id: 1742035158339-source-1742037367273-target
+      source: '1742035158339'
+      sourceHandle: source
+      target: '1742037367273'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: document-extractor
+        targetType: llm
+      id: 1742037888114-source-1742037367273-target
+      source: '1742037888114'
+      sourceHandle: source
+      target: '1742037367273'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetType: llm
+      id: 1742037367273-source-1742039687347-target
+      source: '1742037367273'
+      sourceHandle: source
+      target: '1742039687347'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: start
+        targetType: question-classifier
+      id: 1742034973336-source-1742040672509-target
+      source: '1742034973336'
+      sourceHandle: source
+      target: '1742040672509'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: question-classifier
+        targetType: tool
+      id: 1742040672509-1-1742035158339-target
+      source: '1742040672509'
+      sourceHandle: '1'
+      target: '1742035158339'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: question-classifier
+        targetType: document-extractor
+      id: 1742040672509-1-1742037888114-target
+      source: '1742040672509'
+      sourceHandle: '1'
+      target: '1742037888114'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetType: assigner
+      id: 1742039687347-source-1742040896314-target
+      source: '1742039687347'
+      sourceHandle: source
+      target: '1742040896314'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: assigner
+        targetType: answer
+      id: 1742040896314-source-1742037566026-target
+      source: '1742040896314'
+      sourceHandle: source
+      target: '1742037566026'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: question-classifier
+        targetType: llm
+      id: 1742040672509-2-1742040950682-target
+      source: '1742040672509'
+      sourceHandle: '2'
+      target: '1742040950682'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetType: assigner
+      id: 1742040950682-source-1742041150809-target
+      source: '1742040950682'
+      sourceHandle: source
+      target: '1742041150809'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: assigner
+        targetType: answer
+      id: 1742041150809-source-1742041204057-target
+      source: '1742041150809'
+      sourceHandle: source
+      target: '1742041204057'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 开始
+        type: start
+        variables:
+        - allowed_file_extensions: []
+          allowed_file_types:
+          - document
+          allowed_file_upload_methods:
+          - local_file
+          label: files
+          max_length: 5
+          options: []
+          required: true
+          type: file-list
+          variable: files
+      height: 89
+      id: '1742034973336'
+      position:
+        x: -136.54276257701702
+        y: 87.6935346758155
+      positionAbsolute:
+        x: -136.54276257701702
+        y: 87.6935346758155
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        provider_id: tavily
+        provider_name: tavily
+        provider_type: builtin
+        selected: false
+        title: Tavily Search
+        tool_configurations:
+          days: 3
+          exclude_domains: null
+          include_answer: 0
+          include_domains: null
+          include_image_descriptions: 0
+          include_images: 0
+          include_raw_content: 0
+          max_results: 3
+          search_depth: basic
+          topic: general
+        tool_label: Tavily Search
+        tool_name: tavily_search
+        tool_parameters:
+          query:
+            type: mixed
+            value: '{{#sys.query#}}'
+        type: tool
+      height: 323
+      id: '1742035158339'
+      position:
+        x: 561.4739088433972
+        y: -90.93433746499036
+      positionAbsolute:
+        x: 561.4739088433972
+        y: -90.93433746499036
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: deepseek-v3
+          provider: tongyi
+        prompt_template:
+        - id: c4f8247b-c35d-4e74-a343-6e5235b1f251
+          role: system
+          text: "# 科创类竞赛培训机构公众号文章撰写\n## 目标：\n- 创作吸引家长和学生关注的公众号文章\n- 突出科创竞赛培训机构的教学优势\n\
+            - 分享竞赛相关的实用信息和成功案例\n## 风格：\n- 专业且易懂\n- 鼓励且启发\n- 实用且有价值\n## 语气：\n- 亲切且热情\n\
+            - 权威且可靠\n- 励志且鼓舞人心\n## 受众：\n- 对科创竞赛感兴趣的家长和学生\n- 寻求高质量竞赛培训的家长和学生\n- 追求学术成就和个人成长的家长和学生\n\
+            ## 响应：\n- 生成一篇完整的公众号文章\n- 文章应包含引人入胜的标题、正文和结论\n- 正文中应融合竞赛相关的实用信息和成功案例，增强文章的吸引力和说服力\n\
+            - 用户会提供【主题】【主题相关内容】【公众号参考】，主题是一个竞赛名称，仅围绕这个竞赛名称进行创作，用户会提供该竞赛的最近内容，文本可以融合进正文中；其次，用户还会提供公众号参考，需要你去参考该公众号推文的写作风格进行书写，仅参考写作风格，而不是文章的具体内容，不要和主题混淆。\n\
+            - 联系方式：13661438815\n地址：闵行区七莘路1839号南楼10楼1020室 \n## 示例：\n- 标题：\"培养未来科学家：我们的科创竞赛培训如何助你一臂之力！\"\
+            \n- 正文：介绍培训机构的教学优势，分享竞赛相关的实用信息和成功案例，鼓励家长和学生参与培训，追求学术成就和个人成长。\n- 结论：总结培训的重要性，鼓励读者关注并参与科创竞赛培训。\n\
+            ## 注意事项：\n- 确保文章内容与科创竞赛培训机构相关\n- 参考给定文章的写作风格，保持一致性\n- 使用实用信息和成功案例，增强文章的吸引力和说服力\n\
+            - 不要虚构地址，最后另外培训机构的地址和联系方式，输出：联系方式：13661438815\n地址：闵行区七莘路1839号南楼10楼1020室 "
+        - id: 4b610ed1-1da4-48a9-965e-f2a4cafdd40c
+          role: user
+          text: '1、用户输入的主题是：{{#sys.query#}}
+
+            2、从网上爬取的有关主题的内容，做参考：{{#1742035158339.text#}}
+
+            3、参考文章的写作风格，输出相同类型的公众号文章，仅参考写作风格，而不是文章的具体内容，不要和主题混淆。{{#1742037888114.text#}}'
+        selected: false
+        title: 生成公众号文章
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 97
+      id: '1742037367273'
+      position:
+        x: 1004.1528138868748
+        y: 245.6065801021919
+      positionAbsolute:
+        x: 1004.1528138868748
+        y: 245.6065801021919
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '{{#1742037367273.text#}}'
+        desc: ''
+        selected: false
+        title: 直接回复
+        type: answer
+        variables: []
+      height: 102
+      id: '1742037566026'
+      position:
+        x: 2048.115594669225
+        y: 257.73231263427516
+      positionAbsolute:
+        x: 2048.115594669225
+        y: 257.73231263427516
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        is_array_file: true
+        selected: true
+        title: 文档提取器
+        type: document-extractor
+        variable_selector:
+        - '1742034973336'
+        - files
+      height: 91
+      id: '1742037888114'
+      position:
+        x: 573.5996413754805
+        y: 335.80426349903695
+      positionAbsolute:
+        x: 573.5996413754805
+        y: 335.80426349903695
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: deepseek-v3
+          provider: tongyi
+        prompt_template:
+        - id: 71c4bb3d-ac79-41fc-aae5-078914f35cb7
+          role: system
+          text: '# 公众号文章润色与修改
+
+
+            ## 目标：
+
+            - 润色和修改已有的公众号文章，提升文章质量
+
+            - 突出小鲁班科创培训机构的教学特色和价值
+
+            - 在文章中体现模型制作、论文写作、竞赛申报等培训内容
+
+            - 总结竞赛的获取情况、比例等，展示培训成果
+
+            ## 受众：
+
+            - 对科创竞赛感兴趣的家长和学生
+
+            - 寻求高质量竞赛培训的家长和学生
+
+            - 追求学术成就和个人成长的家长和学生
+
+            ## 响应：
+
+            - 对已有文章进行润色和修改，提升文章质量
+
+            - 在文章中突出小鲁班科创培训机构的教学特色和价值
+
+            - 融入模型制作、论文写作、竞赛申报等培训内容，展示培训实力
+
+            - 总结竞赛的获取情况、比例等，展示培训成果
+
+
+            ## 示例：
+
+            - 原文段落："在科创竞赛中，模型制作是重要的一环。"
+
+            - 修改后："在小鲁班科创培训机构的指导下，学生在模型制作方面取得了显著成果。我们的专业团队提供全方位的指导，从选题到制作，确保学生能够创作出具有竞争力的作品。"
+
+
+            ## 注意事项：
+
+            - 确保文章内容与小鲁班科创培训机构相关
+
+            - 在文章中突出机构的教学特色和价值
+
+            - 使用具体案例和数据，增强文章的说服力
+
+            - 保持语言的流畅性和易懂性
+
+            '
+        - id: 090eb577-99e8-4480-80e6-242a97a96f2b
+          role: user
+          text: 已经写好的第一版公众号文章：{{#1742037367273.text#}}
+        selected: false
+        title: 正文润色
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 97
+      id: '1742039687347'
+      position:
+        x: 1332.9400499554847
+        y: 245.6065801021919
+      positionAbsolute:
+        x: 1332.9400499554847
+        y: 245.6065801021919
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        classes:
+        - id: '1'
+          name: 用户输入了一个主题，是一个竞赛名称，需要根据竞赛竞赛名称去创作公众号
+        - id: '2'
+          name: 用户想要修改内容，并提供修改意见
+        desc: ''
+        instructions: ''
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: deepseek-v3
+          provider: tongyi
+        query_variable_selector:
+        - sys
+        - query
+        selected: false
+        title: 问题分类器
+        topics: []
+        type: question-classifier
+        vision:
+          enabled: false
+      height: 207
+      id: '1742040672509'
+      position:
+        x: 191.7135506332142
+        y: 58.54477976099699
+      positionAbsolute:
+        x: 191.7135506332142
+        y: 58.54477976099699
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        items:
+        - input_type: variable
+          operation: over-write
+          value:
+          - '1742039687347'
+          - text
+          variable_selector:
+          - conversation
+          - content
+          write_mode: over-write
+        selected: false
+        title: 变量赋值
+        type: assigner
+        version: '2'
+      height: 87
+      id: '1742040896314'
+      position:
+        x: 1687.7106181748904
+        y: 302.4622008752655
+      positionAbsolute:
+        x: 1687.7106181748904
+        y: 302.4622008752655
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: glm-4-long
+          provider: zhipuai
+        prompt_template:
+        - id: e430461b-a307-4baa-86c4-1905d1a4b366
+          role: system
+          text: '# 公众号内容修改
+
+
+            ## 目标：
+
+            - 根据用户输入的建议，修改和优化公众号内容
+
+            - 提高内容的吸引力和用户体验
+
+            - 确保内容符合受众需求和偏好
+
+
+            ## 风格：
+
+            - 参考用户建议，调整内容的风格和表达方式
+
+            - 保持语言的流畅性和易懂性
+
+            - 结合用户反馈，增加内容的互动性和参与感
+
+
+            ## 语气：
+
+            - 亲切且热情
+
+            - 权威且可靠
+
+            - 励志且鼓舞人心
+
+
+            ## 受众：
+
+            - 公众号的目标读者和用户
+
+            - 对内容有特定需求和偏好的用户
+
+            - 积极提供反馈和建议的用户
+
+
+            ## 响应：
+
+            - 根据用户建议，修改和优化公众号内容
+
+            - 调整内容的结构、风格和表达方式
+
+            - 增加内容的互动性和参与感
+
+
+            ## 示例：
+
+            - 用户建议："希望公众号内容更加实用，多分享一些案例和经验。"
+
+            - 修改后的内容："为了让您更好地了解我们的培训效果，我们将在公众号中分享更多学员的成功案例和经验，让您看到我们的培训成果和学员的成长。"
+
+
+            ## 注意事项：
+
+            - 认真对待用户的反馈和建议
+
+            - 根据用户需求，调整内容的方向和重点
+
+            - 保持内容的原创性和质量
+
+            - 注意保护用户的隐私和信息安全
+
+            - 仅输出公众号内容，不要输出多余的话
+
+            '
+        - id: 2f0d81c4-3108-479c-aaa6-44e2fb045c05
+          role: user
+          text: '1、用户的修改意见 {{#sys.query#}}
+
+            2、公众号内容 {{#conversation.content#}}'
+        selected: false
+        title: 修改公众号内容
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 97
+      id: '1742040950682'
+      position:
+        x: 573.5996413754805
+        y: 511.33009125635874
+      positionAbsolute:
+        x: 573.5996413754805
+        y: 511.33009125635874
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        items:
+        - input_type: variable
+          operation: over-write
+          value:
+          - '1742040950682'
+          - text
+          variable_selector:
+          - conversation
+          - content
+          write_mode: over-write
+        selected: false
+        title: 变量赋值 2
+        type: assigner
+        version: '2'
+      height: 87
+      id: '1742041150809'
+      position:
+        x: 970.7373001121668
+        y: 511.33009125635874
+      positionAbsolute:
+        x: 970.7373001121668
+        y: 511.33009125635874
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '{{#1742040950682.text#}}'
+        desc: ''
+        selected: false
+        title: 直接回复 2
+        type: answer
+        variables: []
+      height: 102
+      id: '1742041204057'
+      position:
+        x: 1326.0006163121568
+        y: 511.33009125635874
+      positionAbsolute:
+        x: 1326.0006163121568
+        y: 511.33009125635874
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    viewport:
+      x: 176.7617304002672
+      y: 169.68051909663598
+      zoom: 0.9604344335567784
