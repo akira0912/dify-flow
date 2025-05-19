@@ -1,0 +1,997 @@
+app:
+  description: 生产环境
+  icon: 1a2a4590-d5a5-420a-96c0-c118034d572a
+  icon_background: '#FFEAD5'
+  mode: advanced-chat
+  name: AI分析报告Temp
+  use_icon_as_answer_icon: true
+kind: app
+version: 0.1.5
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions: []
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - remote_url
+      - local_file
+      enabled: true
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 1
+    opening_statement: "您当前选择的报告类型：{{type}}\n如需切换报告类型，请新建对话。\n\n请按照以下示例进行输入：\n《行业专题研究报告》输入行业示例：半导体、新能源\
+      \ \n《产业发展洞察报告》输入产业示例：元宇宙、网络安全 \n《电商行业市场洞察报告》输入品类名称示例：平板电脑、电动牙刷 \n《企业研究报告》输入企业名称示例：阿里巴巴、英伟达\
+      \ \n《商业洞察报告》输入领域示例：中国并购交易市场、中国新型实体企业\n 《科技趋势与创新调研报告》输入行业名称示例：中国TMT行业、区块链与数字货币\
+      \ \n《行业投资分析与策略报告》输入行业名称示例：电力设备与储能行业、医药行业 《金融市场分析研究报告》输入行业名称示例：游戏行业、具身智能 \n《股票分析报告》输入股票名称示例：宁德时代、贵州茅台\
+      \ \n《公司市场情绪分析报告》输入公司/行业名称示例：哔哩哔哩、台积电 \n《商业模式分析报告》输入企业名称示例：亚马逊、Airbnb \n\n输出结果预计等待三分钟……\n"
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        sourceType: code
+        targetType: iteration
+      id: 1739251971654-source-1739251500840-target
+      selected: false
+      source: '1739251971654'
+      sourceHandle: source
+      target: '1739251500840'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: knowledge-retrieval
+        targetType: code
+      id: 1739260751402-source-1739251971654-target
+      selected: false
+      source: '1739260751402'
+      sourceHandle: source
+      target: '1739251971654'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: true
+        iteration_id: '1739251500840'
+        sourceType: code
+        targetType: template-transform
+      id: 1739866611721-source-1739866725021-target
+      source: '1739866611721'
+      sourceHandle: source
+      target: '1739866725021'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInIteration: true
+        iteration_id: '1739251500840'
+        sourceType: tool
+        targetType: code
+      id: 1739860418100-source-1739860526280-target
+      source: '1739860418100'
+      sourceHandle: source
+      target: '1739860526280'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInIteration: true
+        iteration_id: '1739251500840'
+        sourceType: template-transform
+        targetType: code
+      id: 1739950165875-source-1739866611721-target
+      source: '1739950165875'
+      sourceHandle: source
+      target: '1739866611721'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInIteration: true
+        iteration_id: '1739251500840'
+        sourceType: llm
+        targetType: code
+      id: 1739862798149-source-1739950477095-target
+      source: '1739862798149'
+      sourceHandle: source
+      target: '1739950477095'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInIteration: true
+        iteration_id: '1739251500840'
+        sourceType: code
+        targetType: template-transform
+      id: 1739950477095-source-1739950165875-target
+      source: '1739950477095'
+      sourceHandle: source
+      target: '1739950165875'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInIteration: true
+        iteration_id: '1739251500840'
+        sourceType: template-transform
+        targetType: answer
+      id: 1739866725021-source-1740367784866-target
+      source: '1739866725021'
+      sourceHandle: source
+      target: '1740367784866'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInIteration: false
+        sourceType: start
+        targetType: answer
+      id: 1739237198958-source-1740375929189-target
+      source: '1739237198958'
+      sourceHandle: source
+      target: '1740375929189'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: answer
+        targetType: knowledge-retrieval
+      id: 1740375929189-source-1739260751402-target
+      source: '1740375929189'
+      sourceHandle: source
+      target: '1739260751402'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: iteration
+        targetType: code
+      id: 1739251500840-source-1740383741876-target
+      source: '1739251500840'
+      sourceHandle: source
+      target: '1740383741876'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: code
+        targetType: http-request
+      id: 1740383741876-source-1740383656510-target
+      source: '1740383741876'
+      sourceHandle: source
+      target: '1740383656510'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: http-request
+        targetType: code
+      id: 1740383656510-source-1740383866349-target
+      source: '1740383656510'
+      sourceHandle: source
+      target: '1740383866349'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: code
+        targetType: answer
+      id: 1740383866349-source-1739263537278-target
+      source: '1740383866349'
+      sourceHandle: source
+      target: '1739263537278'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: true
+        iteration_id: '1739251500840'
+        sourceType: iteration-start
+        targetType: tool
+      id: 1739251500840start-source-1739860418100-target
+      source: 1739251500840start
+      sourceHandle: source
+      target: '1739860418100'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInIteration: true
+        iteration_id: '1739251500840'
+        sourceType: code
+        targetType: llm
+      id: 1739860526280-source-1739862798149-target
+      source: '1739860526280'
+      sourceHandle: source
+      target: '1739862798149'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInIteration: true
+        iteration_id: '1739251500840'
+        sourceType: tool
+        targetType: answer
+      id: 1739860418100-fail-branch-1740554530383-target
+      source: '1739860418100'
+      sourceHandle: fail-branch
+      target: '1740554530383'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInIteration: false
+        sourceType: http-request
+        targetType: answer
+      id: 1740383656510-fail-branch-1740554650949-target
+      source: '1740383656510'
+      sourceHandle: fail-branch
+      target: '1740554650949'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 开始
+        type: start
+        variables:
+        - label: 报告类型
+          max_length: 48
+          options:
+          - 行业专题研究报告
+          - 产业发展洞察报告
+          - 企业研究报告
+          - 商业洞察报告
+          - 行业投资分析与策略报告
+          - 电商行业市场洞察报告
+          - 科技趋势与创新调研报告
+          - 金融市场研究报告
+          - 股票分析报告
+          - 公司市场情绪分析报告
+          - 商业模式分析报告
+          required: true
+          type: select
+          variable: type
+      height: 89
+      id: '1739237198958'
+      position:
+        x: 30
+        y: 426.5
+      positionAbsolute:
+        x: 30
+        y: 426.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        error_handle_mode: continue-on-error
+        height: 499.6848668906109
+        is_parallel: false
+        iterator_selector:
+        - '1739251971654'
+        - result
+        output_selector:
+        - '1739866725021'
+        - output
+        output_type: array[string]
+        parallel_nums: 3
+        selected: false
+        start_node_id: 1739251500840start
+        title: 迭代
+        type: iteration
+        width: 1768.8226366506356
+      height: 500
+      id: '1739251500840'
+      position:
+        x: 1246
+        y: 426.5
+      positionAbsolute:
+        x: 1246
+        y: 426.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 1769
+      zIndex: 1
+    - data:
+        desc: ''
+        isInIteration: true
+        selected: false
+        title: ''
+        type: iteration-start
+      draggable: false
+      height: 48
+      id: 1739251500840start
+      parentId: '1739251500840'
+      position:
+        x: 24
+        y: 68
+      positionAbsolute:
+        x: 1270
+        y: 494.5
+      selectable: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom-iteration-start
+      width: 44
+      zIndex: 1002
+    - data:
+        code: "function main({arg1}) {\n    const temp=arg1[0].content.split('：\\\
+          n')\n    const temp2=temp[1].split('\\n')\n    return {\n        result:\
+          \ temp2\n    }\n}\n"
+        code_language: javascript
+        desc: ''
+        outputs:
+          result:
+            children: null
+            type: array[string]
+        selected: false
+        title: 代码执行
+        type: code
+        variables:
+        - value_selector:
+          - '1739260751402'
+          - result
+          variable: arg1
+      height: 53
+      id: '1739251971654'
+      position:
+        x: 942
+        y: 426.5
+      positionAbsolute:
+        x: 942
+        y: 426.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        dataset_ids:
+        - 8f04e80c-8e64-474d-9a59-27a3d096a201
+        desc: ''
+        multiple_retrieval_config:
+          reranking_enable: false
+          reranking_mode: reranking_model
+          reranking_model:
+            model: jina-reranker-v2-base-multilingual
+            provider: langgenius/jina/jina
+          top_k: 4
+        query_variable_selector:
+        - '1739237198958'
+        - type
+        retrieval_mode: multiple
+        selected: false
+        title: 知识检索
+        type: knowledge-retrieval
+      height: 91
+      id: '1739260751402'
+      position:
+        x: 638
+        y: 426.5
+      positionAbsolute:
+        x: 638
+        y: 426.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '{{#1740383866349.result#}}'
+        desc: ''
+        selected: true
+        title: 直接回复
+        type: answer
+        variables: []
+      height: 102
+      id: '1739263537278'
+      position:
+        x: 4029.283884502955
+        y: 562.0571591418249
+      positionAbsolute:
+        x: 4029.283884502955
+        y: 562.0571591418249
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        error_strategy: fail-branch
+        isInIteration: true
+        iteration_id: '1739251500840'
+        provider_id: fb209b4e-407e-400a-8763-8b51a2599feb
+        provider_name: kimi搜索HTTP
+        provider_type: workflow
+        selected: false
+        title: kimi搜索HTTP
+        tool_configurations: {}
+        tool_label: kimi搜索HTTP
+        tool_name: getkimiSearch
+        tool_parameters:
+          prompt:
+            type: mixed
+            value: '##角色：你是一个专业的文章创作者，尤其擅长分工合作，能够根据大纲的要求创作其中一个部分的内容，同时保证兼顾整个大纲，做到和其他部分能够融合自然，没有冲突，注意协调性和一致性。
+
+              ##任务：首先这是一个【报告名称】，主题是：【主题】，参考完整的大纲内容：【完整大纲】，然后针对其中的【部分标题】进行创作，完成这一标题下的内容，并保证内容的专业性和严谨性。
+
+              给出具体的数据来源，数据来源用[1]、[2]类似的输出，格式是markdown链接，数据来源重复的话，输出一次来源链接即可，不要给重复的链接。
+
+              图文结合，适当输出Markdown表格，例如：在公司简介处可以输出一个公司关键里程碑的表格。
+
+              图片能获取连接的话，用Markdown链接展示。
+
+              最后返回一个markdown的文本内容，不要使用<code>标签，注意标题层级。
+
+              ##【完整大纲】={{#conversation.temp1#}}
+
+              ##【部分标题】={{#1739251500840.item#}}
+
+              ##【报告名称】={{#1739237198958.type#}}
+
+              ##【主题】={{#sys.query#}}'
+          question:
+            type: mixed
+            value: '{{#sys.query#}}{{#1739237198958.type#}}'
+        type: tool
+      height: 89
+      id: '1739860418100'
+      parentId: '1739251500840'
+      position:
+        x: 75.59448458001998
+        y: 167.4393054752005
+      positionAbsolute:
+        x: 1321.59448458002
+        y: 593.9393054752005
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        code: "function main({arg1}) {\n    if(arg1&&arg1.length>0){\n        const\
+          \ data=arg1[0].answer\n        return {\n            text: data\n      \
+          \  }\n    }else{\n        return '出错了'\n    }\n}\n"
+        code_language: javascript
+        desc: ''
+        isInIteration: true
+        iteration_id: '1739251500840'
+        outputs:
+          text:
+            children: null
+            type: string
+        selected: false
+        title: 提取联网搜索http数据
+        type: code
+        variables:
+        - value_selector:
+          - '1739860418100'
+          - json
+          variable: arg1
+      height: 53
+      id: '1739860526280'
+      parentId: '1739251500840'
+      position:
+        x: 390.2060393724994
+        y: 237.1319133732112
+      positionAbsolute:
+        x: 1636.2060393724994
+        y: 663.6319133732112
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        isInIteration: true
+        iteration_id: '1739251500840'
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: glm-4-plus
+          provider: langgenius/zhipuai/zhipuai
+        prompt_template:
+        - id: aa8b4902-f64f-405e-91a1-422ac78bb557
+          role: system
+          text: '你是一个SVG图表生成大师，可以生成美观的SVG图表，字体不重叠，间距合理。仅输出svg代码。
+
+            任务：
+
+            Step 1：检查用户输入内容
+
+            检查用户输入是否包含可用于生成柱状图、饼图或折线图的数据。
+
+            如果有数据，提取横坐标（X轴）和纵坐标（Y轴）的数据，或者饼图数据，继续下一步。
+
+            如果没有数据，停止思考，输出：无。
+
+            Step 2：生成SVG图表
+
+            如果有数据，根据数据生成SVG图表，确保图表美观、间距合理。
+
+            柱状图要求：
+
+            每个柱子的高度适配他的数据值，确保柱子从Y轴底部（最小值）开始绘制。
+
+            柱子之间应有合理的间距，避免重叠。
+
+            每个柱子的填充颜色（fill属性）应不同，且颜色对比明显。
+
+            在每个柱子的顶部或旁边添加文本标签，显示具体数据值，确保文本不会超出图形边界或与其他元素重叠。
+
+            折线图要求：
+
+            折线应根据数据点动态绘制，确保线条平滑。
+
+            在每个数据点旁边添加文本标签，显示具体数据值。
+
+            饼图要求：
+
+            每个扇区的角度应根据数据值动态计算。
+
+            在每个扇区旁边添加文本标签，显示具体数据值和百分比。
+
+            控制SVG的大小，确保图表不会过大（例如，宽度不超过600px，高度不超过400px）。
+
+            Step 3：检查SVG代码
+
+            检查生成的SVG代码，确保：
+
+            文本的y坐标不会超出图形边界。
+
+            所有元素（如柱子、线条、文本）的位置和大小正确。
+
+            仅输出纯粹的SVG代码，不要输出其他文字。确保代码可以直接渲染。
+
+            关键点：
+
+            文本标签位置：确保文本标签位于柱子顶部或旁边，且不会超出边界；
+
+            颜色和间距：确保柱子颜色对比明显，且柱子之间有合理间距。
+
+            仅输出svg代码：不需要多余的解释和文本，只返回纯净的svg代码，不要给我Markdown的格式。'
+        - id: 769e031d-0657-4247-a10f-21b115c0eb63
+          role: user
+          text: 用户输入内容：{{#1739860526280.text#}}
+        selected: false
+        title: LLM 2
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 97
+      id: '1739862798149'
+      parentId: '1739251500840'
+      position:
+        x: 523.1997929771117
+        y: 65
+      positionAbsolute:
+        x: 1769.1997929771117
+        y: 491.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        code: "import base64\n\ndef main(svg_string: str) -> dict:\n    # 检查输入是否无效\n\
+          \    if '无' in svg_string or not svg_string.strip():\n        return {\"\
+          result\": \"\"}\n\n    # 将SVG编码为Base64格式\n    encoded_svg = base64.b64encode(svg_string.encode('utf-8')).decode('utf-8')\n\
+          \n    # 构建data URI\n    data_uri = f\"data:image/svg+xml;base64,{encoded_svg}\"\
+          \n    return {\n        \"result\": data_uri,\n    }"
+        code_language: python3
+        desc: ''
+        isInIteration: true
+        iteration_id: '1739251500840'
+        outputs:
+          result:
+            children: null
+            type: string
+        selected: false
+        title: 代码执行 3
+        type: code
+        variables:
+        - value_selector:
+          - '1739950165875'
+          - output
+          variable: svg_string
+      height: 53
+      id: '1739866611721'
+      parentId: '1739251500840'
+      position:
+        x: 1118.027452793298
+        y: 263.3191615708437
+      positionAbsolute:
+        x: 2364.027452793298
+        y: 689.8191615708437
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        desc: ''
+        isInIteration: true
+        iteration_id: '1739251500840'
+        selected: false
+        template: "{% if arg1 %}\r\n{{ arg2 }}\r\n![图片]({{ arg1 }})\r\n{% else %}\r\
+          \n{{ arg2 }}\r\n{% endif %}"
+        title: 模板转换 3
+        type: template-transform
+        variables:
+        - value_selector:
+          - '1739866611721'
+          - result
+          variable: arg1
+        - value_selector:
+          - '1739860526280'
+          - text
+          variable: arg2
+      height: 53
+      id: '1739866725021'
+      parentId: '1739251500840'
+      position:
+        x: 1210.9827560579058
+        y: 73.89167654712799
+      positionAbsolute:
+        x: 2456.982756057906
+        y: 500.391676547128
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        desc: ''
+        isInIteration: true
+        iteration_id: '1739251500840'
+        selected: false
+        template: "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\r\n\
+          {{ arg1 }}"
+        title: 模板转换 2
+        type: template-transform
+        variables:
+        - value_selector:
+          - '1739950477095'
+          - result
+          variable: arg1
+      height: 53
+      id: '1739950165875'
+      parentId: '1739251500840'
+      position:
+        x: 976.7024040652557
+        y: 131.9483349421198
+      positionAbsolute:
+        x: 2222.702404065256
+        y: 558.4483349421198
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        code: "\nfunction main({arg1}) {\n    return {\n        result: arg1.replace('```svg','').replace('```xml','').replace('```','')\n\
+          \    }\n}\n"
+        code_language: javascript
+        desc: ''
+        isInIteration: true
+        iteration_id: '1739251500840'
+        outputs:
+          result:
+            children: null
+            type: string
+        selected: false
+        title: 去掉```
+        type: code
+        variables:
+        - value_selector:
+          - '1739862798149'
+          - text
+          variable: arg1
+      height: 53
+      id: '1739950477095'
+      parentId: '1739251500840'
+      position:
+        x: 799.8992150535839
+        y: 268.6944730458712
+      positionAbsolute:
+        x: 2045.899215053584
+        y: 695.1944730458712
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        answer: '{{#1739866725021.output#}}'
+        desc: ''
+        isInIteration: true
+        iteration_id: '1739251500840'
+        selected: false
+        title: 直接回复 2
+        type: answer
+        variables: []
+      height: 102
+      id: '1740367784866'
+      parentId: '1739251500840'
+      position:
+        x: 1484.260515971624
+        y: 200.38811180781602
+      positionAbsolute:
+        x: 2730.260515971624
+        y: 626.888111807816
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        answer: <h1>{{#sys.query#}}-{{#1739237198958.type#}}</h1>
+        desc: ''
+        selected: false
+        title: 直接回复 3
+        type: answer
+        variables: []
+      height: 120
+      id: '1740375929189'
+      position:
+        x: 334
+        y: 426.5
+      positionAbsolute:
+        x: 334
+        y: 426.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data:
+          - id: key-value-1
+            key: ''
+            type: text
+            value: '{"content":"{{#1740383741876.result#}}"}'
+          type: json
+        desc: ''
+        error_strategy: fail-branch
+        headers: ''
+        method: post
+        params: ''
+        retry_config:
+          max_retries: 2
+          retry_enabled: true
+          retry_interval: 300
+        selected: false
+        timeout:
+          max_connect_timeout: 0
+          max_read_timeout: 0
+          max_write_timeout: 0
+        title: HTTP md转pdf
+        type: http-request
+        url: your own url
+        variables: []
+      height: 155
+      id: '1740383656510'
+      position:
+        x: 3374.025425352593
+        y: 555.8389408325668
+      positionAbsolute:
+        x: 3374.025425352593
+        y: 555.8389408325668
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "\nfunction main({arg1,type,query}) {\n    const title=`# ${query}-${type}<br>`\n\
+          \    return {\n        result: title+arg1.join(' ')\n    }\n}\n"
+        code_language: javascript
+        desc: ''
+        outputs:
+          result:
+            children: null
+            type: string
+        selected: false
+        title: 迭代arr转字符串
+        type: code
+        variables:
+        - value_selector:
+          - '1739251500840'
+          - output
+          variable: arg1
+        - value_selector:
+          - '1739237198958'
+          - type
+          variable: type
+        - value_selector:
+          - sys
+          - query
+          variable: query
+      height: 53
+      id: '1740383741876'
+      position:
+        x: 3070.0254253525936
+        y: 492.413114078135
+      positionAbsolute:
+        x: 3070.0254253525936
+        y: 492.413114078135
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "function main({ arg1, arg2, type, query }) {\n  if (arg2 === 200 &&\
+          \ arg1) {\n    const url = JSON.parse(arg1).url\n    if (url) {\n      return\
+          \ {\n        result: query + '-' + type + ' ' + 'pdf下载地址:' + url\n     \
+          \ }\n    }\n  }\n  return {\n    result: ''\n  }\n}"
+        code_language: javascript
+        desc: ''
+        outputs:
+          result:
+            children: null
+            type: string
+        selected: false
+        title: 'md-to-pdf提取url '
+        type: code
+        variables:
+        - value_selector:
+          - '1740383656510'
+          - body
+          variable: arg1
+        - value_selector:
+          - '1740383656510'
+          - status_code
+          variable: arg2
+        - value_selector:
+          - '1739237198958'
+          - type
+          variable: type
+        - value_selector:
+          - sys
+          - query
+          variable: query
+      height: 53
+      id: '1740383866349'
+      position:
+        x: 3722.796597179251
+        y: 523.5042056244253
+      positionAbsolute:
+        x: 3722.796597179251
+        y: 523.5042056244253
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: 系统繁忙，请稍后再试！
+        desc: ''
+        isInIteration: true
+        iteration_id: '1739251500840'
+        selected: false
+        title: 直接回复 4
+        type: answer
+        variables: []
+      height: 99
+      id: '1740554530383'
+      parentId: '1739251500840'
+      position:
+        x: 365.3331661354673
+        y: 361
+      positionAbsolute:
+        x: 1611.3331661354673
+        y: 787.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        answer: ' '
+        desc: ''
+        selected: false
+        title: 直接回复 5
+        type: answer
+        variables: []
+      height: 83
+      id: '1740554650949'
+      position:
+        x: 3738.9639647833224
+        y: 828.7308351825336
+      positionAbsolute:
+        x: 3738.9639647833224
+        y: 828.7308351825336
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        author: admin
+        desc: ''
+        height: 135
+        selected: false
+        showAuthor: true
+        text: '{"root":{"children":[{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"作者：akira","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"工作流详解：","type":"text","version":1},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"akira0912
+          的个人主页 - 动态 - 掘金","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"link","version":1,"rel":null,"target":null,"title":null,"url":"https://juejin.cn/user/4306112028351885"}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"知识库示例：","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":1,"mode":"normal","style":"","text":"行业专题研究报告：","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"行业概述","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"市场趋势与预测","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"技术发展与创新","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"政策环境与支持","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"竞争格局与企业动态","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"产业链与供应链管理","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"案例研究","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"经济贡献与社会影响","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"SWOT分析","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"风险与对策","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"***","type":"text","version":1}],"direction":null,"format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":1,"mode":"normal","style":"","text":"产业发展洞察报告：","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"产业概况与历史发展","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"政策与法规支持","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"市场规模与增长趋势","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"技术趋势与创新","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"行业案例与实践","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"PEST分析","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"未来展望与建议","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"***","type":"text","version":1}],"direction":null,"format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":1,"mode":"normal","style":"","text":"电商行业市场洞察报告：","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"品类概况","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"平台数据与技术发展","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"市场规模与增长趋势","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"畅销品牌与热销产品","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"价格区间与消费行为","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"细分市场与重点企业分析","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"区域差异与文化因素","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"法律合规与进口贸易","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"未来发展趋势与机遇","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"***","type":"text","version":1}],"direction":null,"format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":1,"mode":"normal","style":"","text":"企业研究报告：","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"公司概况与历史发展","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"企业文化与管理理念","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"产品与服务","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"财务表现与业绩分析","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"技术创新与核心竞争力","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"SWOT分析","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"国际化战略与全球布局","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"风险与挑战","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"未来规划与发展目标","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"***","type":"text","version":1}],"direction":null,"format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":1,"mode":"normal","style":"","text":"商业洞察报告：","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"领域发展现状","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"法律与政策环境","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"市场概况与趋势分析","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"竞争格局与企业分析","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"PEST分析","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"未来展望与投资预测","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"***","type":"text","version":1}],"direction":null,"format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":1,"mode":"normal","style":"","text":"科技趋势与创新调研报告：","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"行业发展现状及市场趋势","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"投资热点与区域分布","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"技术创新与未来前景","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"政策导向与宏观环境","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"具体子行业分析","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"竞争格局与企业分析","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"PEST分析","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"风险与机遇","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"***","type":"text","version":1}],"direction":null,"format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":1,"mode":"normal","style":"","text":"行业投资分析与策略报告：","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"行业现状与发展趋势","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"市场供需格局","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"政策环境与驱动因素","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"PEST分析","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"投资主线与策略","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"估值与基金持仓","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"新兴市场","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"细分赛道与投资机会","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"***","type":"text","version":1}],"direction":null,"format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":1,"mode":"normal","style":"","text":"金融市场研究报告：","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"市场环境分析","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"行业分析","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"公司基本面分析","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"技术分析","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"投资策略建议","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"案例研究","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"***","type":"text","version":1}],"direction":null,"format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":1,"mode":"normal","style":"","text":"股票分析报告：","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"公司概况","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"财务状况分析","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"市场地位与竞争力","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"业务发展与前景","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"投资建议","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"风险提示","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"***","type":"text","version":1}],"direction":null,"format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":1,"mode":"normal","style":"","text":"公司市场情绪分析报告：","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"行业背景与趋势","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"财务表现与业绩回顾","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"股价波动与市场情绪","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"投资策略建议","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"***","type":"text","version":1}],"direction":null,"format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":1,"mode":"normal","style":"","text":"商业模式分析报告：","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"历史发展","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"目标客户群","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"业务布局","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"技术创新","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"运营模式","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"财务表现与盈利能力","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"竞争优势与行业地位","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"未来发展方向与挑战","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":" ","type":"text","version":1}],"direction":null,"format":"","indent":0,"type":"paragraph","version":1,"textFormat":0}],"direction":"ltr","format":"","indent":0,"type":"root","version":1}}'
+        theme: blue
+        title: ''
+        type: ''
+        width: 322
+      height: 135
+      id: '1747631519943'
+      position:
+        x: 30
+        y: 764.8762871351951
+      positionAbsolute:
+        x: 30
+        y: 764.8762871351951
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom-note
+      width: 322
+    viewport:
+      x: 121.19455436091948
+      y: -227.66819344091277
+      zoom: 0.9304356866735005
