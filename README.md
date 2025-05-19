@@ -1,2 +1,3 @@
-# dify-flow
-Share my own dify workflow
+# dify工作流
+ 完成类似秘塔工作流类似的功能，问的人很多就开源了，麻烦大家点个star。
+ 工作流拆解可以看我的博客：https://juejin.cn/post/7484530047866765366
